@@ -1,0 +1,239 @@
+@import 'variables';
+@import 'mixins';
+
+// reset
+* {
+	margin: 0; padding: 0
+};
+
+html, body, #app-container, .gamepoint-wrapper, .item-collection-wrapper, .player-items-wrapper {
+	height: 100%;
+}
+
+body {
+	color: #000;
+	font-family: $appFont;
+}
+
+.item-collection-wrapper {
+	@include breakpoint(tablet-potrait) {
+		height: 30%;
+	}
+
+	@include breakpoint(tablet-landscape) {
+		height: 100%;
+		width: 50%;
+		float: left;
+		box-shadow: -4px 0 0px 0px $itemHeaderBackground inset;
+	}
+
+	.start-new-game {
+		@include breakpoint(tablet-landscape) {
+			display: none;
+		}
+	}
+}
+
+.item-collection-header {
+	background: $itemHeaderBackground;
+	padding: 0.8rem;
+	overflow: hidden;
+	h1 {
+		width: calc(100% - 2.7rem);
+		float: left;
+		a {
+			color: $headerTextColor;
+			text-decoration: none;
+		}
+	}
+	.scoreboard-icon {
+		float: right;
+		width: 2.5rem;
+		height: 1.6rem;
+		margin-top: 0.5rem;
+		@include breakpoint(tablet-potrait) {
+			display: none;
+		}
+	}
+
+}
+
+.item-collection {
+	padding: 1rem;
+	.player-item {
+		background: #b4dc7a;
+		display: block;
+		float: left;
+		margin-top: 0.5rem;
+		border: 3px solid #8fa96a;
+		padding: 1rem 2rem;
+		color: #444;
+		border-radius: 50px;
+		text-align: center;
+		margin-right: 0.5rem;
+		transition: $transitionTime;
+		cursor: pointer;
+		position: relative;
+		&:hover {
+			background: #d0e4b2;
+		}
+	}
+}
+
+.start-new-game {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+	button {
+		border: none;
+		width: 100%;
+		padding: 1rem;
+		font-weight: 400;
+		font-family: $appFont;
+		font-size: 1.3rem;
+		background: #54bd85;
+		color: #fff;
+		transition: $transitionTime;
+		cursor: pointer;
+		&:hover {
+			background: #2e8456;
+		}
+	}
+}
+
+.player-items-wrapper {
+	position: absolute;
+	top: 4.6rem;
+	background: #fff;
+	padding: 1rem;
+	margin: auto;
+	width: 100%;
+	box-sizing: border-box;
+	height: calc(100% - 4.6rem);
+	@include breakpoint(tablet-potrait) {
+		position: inherit;
+		height: 70%;
+	}
+
+	@include breakpoint(tablet-landscape) {
+		height: 100%;
+		width: 50%;
+		float: left;
+		padding-top: 0;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		border-top: 5px solid transparent;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-bottom: 10px solid #fff;
+		top: -20px;
+		right: 25px;
+	}
+	&.show-player-items {
+		display: block;
+	}
+	&.hide-player-items {
+		display: none;
+		@include breakpoint(tablet-potrait) {
+			display: block;
+		}
+	}
+
+	.player-items-header {
+		margin-bottom: 1rem;
+		@include breakpoint(tablet-potrait) {
+			padding: 10px;
+			background: $itemHeaderBackground;
+			color: #fff;
+			margin-left: -1rem;
+			margin-right: -1rem;
+		}
+
+		@include breakpoint(tablet-landscape) {
+			padding: 0.8rem;
+			background: #61b9b8;
+			h2 {
+				font-size: 2rem;
+			}
+		}
+	}
+
+	.player-items {
+		margin-bottom: 1rem;
+		table {
+			width: 100%;
+			text-align: left;
+			border-collapse: collapse;
+		}
+		thead {
+			background: $itemHeaderBackground;
+			color: #fff;
+		}
+		th, td {
+			border-bottom: 1px solid #ccc;
+			padding: 10px 5px;
+			@include breakpoint(tablet-landscape) {
+				padding: 15px;
+			}
+		}
+		tbody {
+			tr:nth-last-child(2) {
+				border-bottom: none;
+			}
+		}
+		
+		.subtotal {
+			background: #666;
+			color: #fff;
+			td {
+				border-bottom: none;
+			}
+		}
+		.total {
+			background: #9baf77;
+			color: #fff;
+			font-weight: 600;
+			font-size: 1.4rem;
+		}
+	}
+
+	.start-new-game {
+		visibility: hidden;
+		position: relative;
+		@include breakpoint(tablet-landscape) {
+			visibility: visible;
+		}
+	}
+}
+
+.collected-score, .collected-bonus {
+	position: absolute;
+	right: 17%;
+	font-size: 2.5rem;
+	color: #cec437;
+	opacity: 0;
+	top: -10%;
+	@include breakpoint(tablet-landscape) {
+		left: 17%;
+		right: 0;
+	}
+	&.fadeinout-enter.fadeinout-enter-active {
+		animation: fadeInOut 0.4s;
+		animation-fill-mode: forwards;
+	}
+}
+
+.collected-bonus {
+	&.fadeinout-enter.fadeinout-enter-active {
+		animation: fadeInOut 1s;
+	}
+}
+
+
+
+
+
